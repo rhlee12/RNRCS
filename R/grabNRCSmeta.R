@@ -1,20 +1,22 @@
 ##############################################################################################
 #' @title grabNRCS.meta
 
-#' @author Josh Roberti \email{jaroberti87@gmail.com} 
+#' @author Josh Roberti \email{jaroberti87@gmail.com}
 
-#' @description A search tool that grabs site level metadata for NRCS networks: SCAN, SNOTEL, SNOTEL-LITE, SNOW, MPRC, and OTHER 
+#' @description A search tool that grabs site level metadata for NRCS networks: SCAN, SNOTEL, SNOTEL-LITE, SNOW, MPRC, and OTHER
 
-#' @param ntwrks Name(s) of NRCS network(s) to grab metadata for.  Options are: 'SCAN', 'SNTL', 'SNTLT', 'SNOW', 'MPRC', and/or 'OTHER'. The user may also enter the term 'ALL' to grab site level metadata for all NRCS networks.  Default is 'SCAN'\cr
-#' @param cnvt.elev Optional parameter to convert elevation data from feet to meters.  Default is set to FALSE, i.e., elevation data are output in units of feet.
+#' @param ntwrks Name(s) of NRCS network(s) to grab metadata for.  Options are: 'SCAN','SNTL','SNTLT','SNOW','MPRC','OTHER','COOP','USGS','MSNT','BOR','CLMIND' and/or 'ALL'. If the user enters the term 'ALL,' site level metadata for all networks will be returned.  Default is 'SCAN'\cr
+#' @param cnvt.elev Optional. If set to TRUE, the elevation data will be converted from feet to meters.  Default is set to FALSE, i.e., elevation data are output in units of feet.
 
 #' @return A list of n dataframes comprising the site level metadata for n NRCS networks\cr
 
 #' @keywords environment, data, environmental data, atmosphere, atmopsheric data, climate, in-situ, weather\cr
 
+#' @references A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
+
 #' @examples
 #' grabNRCS.meta(ntwrks="SCAN")
-#' grabNRCS.meta(ntwrks=c("SNTL","OTHER"))
+#' grabNRCS.meta(ntwrks=c("SNTL","MPRC"))
 #' grabNRCS.meta(ntwrks="ALL")
 
 #' @seealso Currently none
@@ -24,14 +26,16 @@
 # changelog and author contributions / copyrights
 #   Josh Roberti (2017-02-20)
 #     original creation
+#   Josh Roberti (2017-20-28)
+#     added COOP, USGS, MSNT, BOR, and CLMIND stations to search
 ##############################################################################################
 
 grabNRCS.meta<-function(ntwrks="SCAN",cnvrt.elev=FALSE){
     #QC check:
-    ntwrks.cntrl<-c("SCAN","SNTL","SNTLT","SNOW","MPRC","OTHER","ALL")
+    ntwrks.cntrl<-c("SCAN","SNTL","SNTLT","SNOW","MPRC","OTHER","COOP","USGS","MSNT","BOR","CLMIND","ALL")
     ntwrks.QC<-ntwrks %in% ntwrks.cntrl
     if(any(ntwrks.QC)==FALSE){
-        stop("Incorrect ntwrk name(s). Please use the controlled terms: 'SCAN','SNTL','SNTLT','SNOW','MPRC,'OTHER', or you may use 'ALL' to pull metadata for all NRCS networks")
+        stop("Incorrect ntwrk name(s). Please use the controlled terms: 'SCAN','SNTL','SNTLT','SNOW','MPRC','OTHER','COOP','USGS','MSNT','BOR','CLMIND', or you may use 'ALL' to pull metadata for all NRCS networks")
     }
     if(ntwrks[1]=="ALL"){
         #grab all networks from controlled list:
@@ -55,7 +59,7 @@ grabNRCS.meta<-function(ntwrks="SCAN",cnvrt.elev=FALSE){
     #searchNtwks<-paste0("\\<td>")
     searchNtwks<-paste(paste0("\\<td>",ntwrks),collapse="|")
     findLineStart<-lapply(metadata.NRCS, function(x)  grep(searchNtwks,x))
-    #clean the metadata of HTML tags: 
+    #clean the metadata of HTML tags:
     cleanMeta<-lapply(metadata.NRCS,function(x) gsub("<.*?>", "", x))
     #loop thru and finish the cleanup and conversion to DF:
     NRCS.metadata<-list()
@@ -70,8 +74,12 @@ grabNRCS.meta<-function(ntwrks="SCAN",cnvrt.elev=FALSE){
         NRCS.metadata[[i]]<-data.frame(do.call(rbind,metadata.NRCS.clean))
         #add headers as names:
         names(NRCS.metadata[[i]])<-metaHeaders[[i]]
+        #remove excess white space within the ntwrks column:
+        NRCS.metadata[[i]]$ntwk<-trimws(NRCS.metadata[[i]]$ntwk,"both")
         #partition the site name and site ID:
-        NRCS.metadata[[i]]$site_id<-gsub(".*\\((.*)\\).*", "\\1", NRCS.metadata[[i]]$site_name)
+        NRCS.metadata[[i]]$site_id<-paste0(NRCS.metadata[[i]]$ntwk,":",gsub(".*\\((.*)\\).*", "\\1", NRCS.metadata[[i]]$site_name))
+        #add the ntwrk name to the siteID for more accurate reference:
+        #NRCS.metadata[[i]]$site_id
         #remove the site id from the "site.name" column
         NRCS.metadata[[i]]$site_name<-gsub("\\s*\\([^\\)]+\\)","",as.character(NRCS.metadata[[i]]$site_name))
         #convert feet to meters:
@@ -85,10 +93,10 @@ grabNRCS.meta<-function(ntwrks="SCAN",cnvrt.elev=FALSE){
             #change the 'elev' column name to 'elev_ft' to make avoid ambiguity
             names(NRCS.metadata[[i]])[names(NRCS.metadata[[i]]) == 'elev'] <- 'elev_ft'
         }
-        
+
     }
     #set the names of the dataframes to the corresponding network name:
     names(NRCS.metadata)<-ntwrks
     return(NRCS.metadata)#output the metadata to user
-    
+
 }#end Function
