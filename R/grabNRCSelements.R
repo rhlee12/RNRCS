@@ -74,7 +74,6 @@ grabNRCS.elements<-function(site_id="SCAN:2221"){
     elementData[QC.check.index]<-NA
     #set the names of each nested dataframe to the NRCS station id:
     names(elementData)<-site_id.label
-    NRCS.metadata[[i]]$ntwk<-trimws(NRCS.metadata[[i]]$ntwk,"both")
     #return the list of dataframes comprising element level data:
     return(elementData)
 }#end function
