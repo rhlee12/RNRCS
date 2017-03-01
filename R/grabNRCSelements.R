@@ -20,6 +20,8 @@
 #' grabNRCS.elements(site_id=SNTL.sites$SNTL$site_id)
 #' #It may take up to several minutes to download element level data for an entire NRCS network
 
+#' @references element level information can be found here: https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm#commonlyUsedElementCodes
+#'
 #' @seealso Currently none
 
 #' @export
@@ -72,6 +74,7 @@ grabNRCS.elements<-function(site_id="SCAN:2221"){
     elementData[QC.check.index]<-NA
     #set the names of each nested dataframe to the NRCS station id:
     names(elementData)<-site_id.label
+    NRCS.metadata[[i]]$ntwk<-trimws(NRCS.metadata[[i]]$ntwk,"both")
     #return the list of dataframes comprising element level data:
     return(elementData)
 }#end function
