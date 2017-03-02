@@ -1,10 +1,33 @@
-# Non standard Elements
-# COOP: TMAX, TMIN, TAVG, PRCP,
-# SNOW: SNWD, WTEQ
-# BOR: REST, RESC
-# USGS: SRDOO, H2OPH
-# OTHER: TMAX, TMIN, TAVG, PRCP, PREC
+##############################################################################################
+#' @title grabNRCS.data
 
+#' @author Robert Lee \email{rhlee@colorado.edu}
+
+#' @description A data downloading tool for NRCS networks.
+
+#' @param network The network of the NRCS/AWDB site of interest. Currently only works for options: 'SCAN','SNTL','SNTLT', and 'OTHER'.\cr
+#' @param site_id The NRCS site ID. Use grabNRCS.meta to retrieve a list of available sites in a specified network. \cr
+#' @param timescale Specify the desired timescale of the data. Typically 'hourly', 'daily', or 'monthly'\cr
+#' @param DayBgn Optional. Specify the beginning date for the returned date, otherwise the beginning of the period of record is returned.\cr
+#' @param DayEnd Optional. Specify the end date for the returned date, otherwise the end of the period of record is returned.\cr
+#'
+#' @return Returns a data frame of requested data. If the output is not specified, the data frame is returned as 'NRCS.df' to the global environment.\cr
+
+#' @keywords environment, data, environmental data, atmosphere, atmopsheric data, climate, in-situ, weather\cr
+
+#' @references A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
+
+#' @examples
+#' Currently none
+
+#' @seealso Currently none
+
+#' @export
+
+# changelog and author contributions / copyrights
+#   Robert Lee (2017-03-03)
+#     original creation
+##############################################################################################
 
 grabNRCS.data<-function(network, site_id, timescale, DayBgn, DayEnd){
 
