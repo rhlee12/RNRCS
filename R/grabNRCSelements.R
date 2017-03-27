@@ -55,6 +55,17 @@ grabNRCS.elements<-function(site_id="SCAN:2221"){
     site.elements.sub<-lapply(site.elements, function(x) x %>% rvest::html_nodes("option"))
     #clean the html tags:
     elements.clean<-lapply(site.elements.sub, function(x) gsub("<.*?>", "", x))
+    #assign names now - can use this later to properly name the resulting list of sites:
+    names(elements.clean)<-site_id.label
+    #find sites with no element level metadata:
+    noElementMeta.sites<-which(lapply(elements.clean, function(x) length(x))==0)
+    #remove sites with  no element level metadata:
+    if(length(noElementMeta.sites)>0){
+        elements.clean<-elements.clean[-noElementMeta.sites]
+        if(length(elements.clean)==0){
+            stop("No element level metadata for site of interest.")
+        }
+    }
     #subset the data based on grep
     elementSubset<-lapply(elements.clean, function(x) x[(grep("Individual elements",x)+1):(grep("Daily",x)-1)])
     #clean the data elements:
@@ -73,7 +84,7 @@ grabNRCS.elements<-function(site_id="SCAN:2221"){
     #replace those that fail QC test with NA
     elementData[QC.check.index]<-NA
     #set the names of each nested dataframe to the NRCS station id:
-    names(elementData)<-site_id.label
+    names(elementData)<-names(elements.clean)
     #return the list of dataframes comprising element level data:
     return(elementData)
 }#end function
