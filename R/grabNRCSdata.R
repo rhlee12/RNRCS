@@ -18,8 +18,6 @@
 #' @references A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
 
 #' @examples
-#' grabNRCS.data(network="SNTL", site_id=314, timescale="daily", DayBgn="2017-01-01", DayEnd="2017-02-01")
-#' #Return daily summaries for January 2017, at a SNOTEL site.
 #' grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly")
 #' #Return monthly summaries for the period of record at a SNOLITE site.
 
@@ -98,10 +96,12 @@ grabNRCS.data<-function(network, site_id, timescale, DayBgn, DayEnd){
 
     # Remove all NA columns, and report which data varaiables they were
     tempDF<-as.data.frame(dfNRCS[-1,])
-    missingVars<<-names(which(colSums(is.na(tempDF))==nrow(tempDF)))
+    missingVars<-names(which(colSums(is.na(tempDF))==nrow(tempDF)))
+    return(missingVars)
 
     # Output the final results to the global environment
-    NRCS.df<<-tempDF[,-which(colSums(is.na(tempDF))==nrow(tempDF))]
+    NRCS.df<-tempDF[,-which(colSums(is.na(tempDF))==nrow(tempDF))]
+    return(NRCS.df)
 }
 
 

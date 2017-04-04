@@ -24,8 +24,6 @@ Returns a data frame of requested data and a list of varaibles with no data. If 
 A data downloading tool for NRCS networks. Data are returned to the global environment as NRCS.df, if output isn't specified. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
 }
 \examples{
-grabNRCS.data(network="SNTL", site_id=314, timescale="daily", DayBgn="2017-01-01", DayEnd="2017-02-01")
-#Return daily summaries for January 2017, at a SNOTEL site.
 grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly")
 #Return monthly summaries for the period of record at a SNOLITE site.
 }

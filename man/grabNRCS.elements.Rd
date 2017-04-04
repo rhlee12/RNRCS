@@ -19,10 +19,6 @@ A search tool that grabs element metadata (reporting variables) for sites within
 grabNRCS.elements(site_id='SCAN:2221')
 grabNRCS.elements(site_id=c('SCAN:2221','SNTL:1277','SNTL:1252'))
 
-#You can make use of both 'grab' functions, \\code{grabNRCS.meta()} & \\code{grabNRCS.elements()} to grab site and element level data for a specific network
-SNTL.sites<-grabNRCS.meta(ntwrks="SNTL")
-grabNRCS.elements(site_id=SNTL.sites$SNTL$site_id)
-#It may take up to several minutes to download element level data for an entire NRCS network
 }
 \references{
 element level information can be found here: https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm#commonlyUsedElementCodes

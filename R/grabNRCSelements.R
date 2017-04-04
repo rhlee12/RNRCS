@@ -15,10 +15,6 @@
 #' grabNRCS.elements(site_id='SCAN:2221')
 #' grabNRCS.elements(site_id=c('SCAN:2221','SNTL:1277','SNTL:1252'))
 #'
-#' #You can make use of both 'grab' functions, \code{grabNRCS.meta()} & \code{grabNRCS.elements()} to grab site and element level data for a specific network
-#' SNTL.sites<-grabNRCS.meta(ntwrks="SNTL")
-#' grabNRCS.elements(site_id=SNTL.sites$SNTL$site_id)
-#' #It may take up to several minutes to download element level data for an entire NRCS network
 
 #' @references element level information can be found here: https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm#commonlyUsedElementCodes
 #'
@@ -77,7 +73,7 @@ grabNRCS.elements<-function(site_id="SCAN:2221"){
     #put information into dataframe and output:
     elementData<-lapply(Map(cbind,variables,dates), function(x) data.frame(x))
     #set names within each dataframe:
-    elementData<-lapply(elementData, setNames, nm = c("element","date.start"))
+    elementData<-lapply(elementData, stats::setNames, nm = c("element","date.start"))
     #final Check to make sure element level data and dates actually exist:
     QC.check<-lapply(elements.clean, function(x) ((grep("Individual elements",x)+1)-(grep("Daily",x)-1)))
     QC.check.index<-which(unlist(QC.check)>0)  #this checks to see if an NRCS site doesn't exist or doesn't have element data

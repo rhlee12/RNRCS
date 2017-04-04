@@ -1,6 +1,6 @@
 Package: RNRCS
 Type: Package
-Title: Download and Work with NRCS data
+Title: Download and Work with NRCS Data
 Version: 0.1.0
 Author: Robert Lee <rhlee@colorado.edu>, Josh Roberti <jaroberti87@gmail.com>,
 Maintainer: Robert Lee <rhlee@colorado.edu>

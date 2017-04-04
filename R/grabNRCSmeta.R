@@ -16,8 +16,6 @@
 
 #' @examples
 #' grabNRCS.meta(ntwrks="SCAN")
-#' grabNRCS.meta(ntwrks=c("SNTL","MPRC"))
-#' grabNRCS.meta(ntwrks="ALL")
 
 #' @seealso Currently none
 
