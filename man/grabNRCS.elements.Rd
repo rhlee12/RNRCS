@@ -16,9 +16,9 @@ A list of n dataframes comprising the element level metadata for n NRCS sites
 A search tool that grabs element metadata (reporting variables) for sites within networks managed by the NRCS. Element level metadata can be pulled for the following networks: i) SCAN, ii) SNOTEL (SNTL), iii) SNOTEL-Lite (SNTLT), or iv) OTHER\cr
 }
 \examples{
-grabNRCS.elements(site_id='SCAN:2221',verbose=FALSE)
+grabNRCS.elements(site_id='SCAN:2221')
 grabNRCS.elements(site_id=c('SCAN:2221','SNTL:1277','SNTL:1252'))
-\\cr
+
 #You can make use of both 'grab' functions, \\code{grabNRCS.meta()} & \\code{grabNRCS.elements()} to grab site and element level data for a specific network
 SNTL.sites<-grabNRCS.meta(ntwrks="SNTL")
 grabNRCS.elements(site_id=SNTL.sites$SNTL$site_id)

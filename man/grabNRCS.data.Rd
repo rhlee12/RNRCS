@@ -13,9 +13,9 @@ grabNRCS.data(network, site_id, timescale, DayBgn, DayEnd)
 
 \item{timescale}{Specify the desired timescale of the data. Typically 'hourly', 'daily', or 'monthly'\cr}
 
-\item{DayBgn}{Optional. Specify the beginning date (as ) for the returned data, otherwise the beginning of the period of record is returned.\cr}
+\item{DayBgn}{Optional. Specify the beginning date (as YYYY-MM-DD ) for the returned data, otherwise the beginning of the period of record is returned.\cr}
 
-\item{DayEnd}{Optional. Specify the end date for the returned data, otherwise the end of the period of record is returned.\cr}
+\item{DayEnd}{Optional. Specify the end date (as YYYY-MM-DD ) for the returned data, otherwise the end of the period of record is returned.\cr}
 }
 \value{
 Returns a data frame of requested data and a list of varaibles with no data. If the output is not specified, the data frame is returned as 'NRCS.df' to the global environment. A list of missing variables is also returned to the Global Environment, as 'missingVars'.\cr
@@ -24,9 +24,10 @@ Returns a data frame of requested data and a list of varaibles with no data. If 
 A data downloading tool for NRCS networks. Data are returned to the global environment as NRCS.df, if output isn't specified. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
 }
 \examples{
-grabNRCS.data(network="SCAN", site_id=2221, timescale="hourly", DayBgn="2017-01-01", DayEnd="2017-02-01") #Return houly summaries for January 2017, at a SCAN site.
-grabNRCS.data(network="SNTL", site_id=314, timescale="daily", DayBgn="2017-01-01", DayEnd="2017-02-01") # #Return daily summaries for January 2017, at a SNOTEL site.
-grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly") #Return monthly summaries for the period of record at a SNOLITE site.
+grabNRCS.data(network="SNTL", site_id=314, timescale="daily", DayBgn="2017-01-01", DayEnd="2017-02-01")
+#Return daily summaries for January 2017, at a SNOTEL site.
+grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly")
+#Return monthly summaries for the period of record at a SNOLITE site.
 }
 \references{
 A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf

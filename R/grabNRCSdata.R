@@ -8,8 +8,8 @@
 #' @param network The network of the NRCS/AWDB site of interest. Currently only works for options: 'SCAN','SNTL','SNTLT', and 'OTHER'.\cr
 #' @param site_id The NRCS site ID. Use grabNRCS.meta to retrieve a list of available sites in a specified network. Consider using the package 'metScanR' to locate sites.\cr
 #' @param timescale Specify the desired timescale of the data. Typically 'hourly', 'daily', or 'monthly'\cr
-#' @param DayBgn Optional. Specify the beginning date (as ) for the returned data, otherwise the beginning of the period of record is returned.\cr
-#' @param DayEnd Optional. Specify the end date for the returned data, otherwise the end of the period of record is returned.\cr
+#' @param DayBgn Optional. Specify the beginning date (as YYYY-MM-DD ) for the returned data, otherwise the beginning of the period of record is returned.\cr
+#' @param DayEnd Optional. Specify the end date (as YYYY-MM-DD ) for the returned data, otherwise the end of the period of record is returned.\cr
 #'
 #' @return Returns a data frame of requested data and a list of varaibles with no data. If the output is not specified, the data frame is returned as 'NRCS.df' to the global environment. A list of missing variables is also returned to the Global Environment, as 'missingVars'.\cr
 
@@ -18,9 +18,10 @@
 #' @references A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
 
 #' @examples
-#' grabNRCS.data(network="SCAN", site_id=2221, timescale="hourly", DayBgn="2017-01-01", DayEnd="2017-02-01") #Return houly summaries for January 2017, at a SCAN site.
-#' grabNRCS.data(network="SNTL", site_id=314, timescale="daily", DayBgn="2017-01-01", DayEnd="2017-02-01") # #Return daily summaries for January 2017, at a SNOTEL site.
-#' grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly") #Return monthly summaries for the period of record at a SNOLITE site.
+#' grabNRCS.data(network="SNTL", site_id=314, timescale="daily", DayBgn="2017-01-01", DayEnd="2017-02-01")
+#' #Return daily summaries for January 2017, at a SNOTEL site.
+#' grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly")
+#' #Return monthly summaries for the period of record at a SNOLITE site.
 
 #' @seealso Currently none
 
@@ -49,7 +50,7 @@ grabNRCS.data<-function(network, site_id, timescale, DayBgn, DayEnd){
 
     #Stick to the networks- need to add "USGS:, "OTHER", "COOP", "SNOW", "BOR" once those are sorted out
     ctrlNetworks<-c("SCAN","SNTL","SNTLT")
-    if (!network %in% ctrlTimeScale){stop("Please enter one of the following for network: 'SCAN', 'SNTL', 'SNTLT'")}
+    if (!network %in% ctrlNetworks){stop("Please enter one of the following for network: 'SCAN', 'SNTL', 'SNTLT'")}
 
     #Station metadata
     meta<-grabNRCS.meta(ntwrks = network)

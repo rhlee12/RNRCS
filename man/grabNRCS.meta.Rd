@@ -9,7 +9,7 @@ grabNRCS.meta(ntwrks = "SCAN", cnvrt.elev = FALSE)
 \arguments{
 \item{ntwrks}{Name(s) of NRCS network(s) to grab metadata for.  Options are: 'SCAN','SNTL','SNTLT','SNOW','MPRC','OTHER','COOP','USGS','MSNT','BOR','CLMIND' and/or 'ALL'. If the user enters the term 'ALL,' site level metadata for all networks will be returned.  Default is 'SCAN'\cr}
 
-\item{cnvt.elev}{Optional. If set to TRUE, the elevation data will be converted from feet to meters.  Default is set to FALSE, i.e., elevation data are output in units of feet.}
+\item{cnvrt.elev}{Optional. If set to TRUE, the elevation data will be converted from feet to meters.  Default is set to FALSE, i.e., elevation data are output in units of feet.}
 }
 \value{
 A list of n dataframes comprising the site level metadata for n NRCS networks\cr

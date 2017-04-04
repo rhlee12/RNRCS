@@ -6,7 +6,7 @@
 #' @description A search tool that grabs site level metadata for NRCS networks: SCAN, SNOTEL, SNOTEL-LITE, SNOW, MPRC, and OTHER
 
 #' @param ntwrks Name(s) of NRCS network(s) to grab metadata for.  Options are: 'SCAN','SNTL','SNTLT','SNOW','MPRC','OTHER','COOP','USGS','MSNT','BOR','CLMIND' and/or 'ALL'. If the user enters the term 'ALL,' site level metadata for all networks will be returned.  Default is 'SCAN'\cr
-#' @param cnvt.elev Optional. If set to TRUE, the elevation data will be converted from feet to meters.  Default is set to FALSE, i.e., elevation data are output in units of feet.
+#' @param cnvrt.elev Optional. If set to TRUE, the elevation data will be converted from feet to meters.  Default is set to FALSE, i.e., elevation data are output in units of feet.
 
 #' @return A list of n dataframes comprising the site level metadata for n NRCS networks\cr
 
