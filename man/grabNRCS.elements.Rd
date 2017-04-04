@@ -24,14 +24,14 @@ SNTL.sites<-grabNRCS.meta(ntwrks="SNTL")
 grabNRCS.elements(site_id=SNTL.sites$SNTL$site_id)
 #It may take up to several minutes to download element level data for an entire NRCS network
 }
-\author{
-Josh Roberti \email{jaroberti87@gmail.com}
-}
 \references{
 element level information can be found here: https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm#commonlyUsedElementCodes
 }
 \seealso{
 Currently none
+}
+\author{
+Josh Roberti \email{jaroberti87@gmail.com}
 }
 \keyword{atmopsheric}
 \keyword{atmosphere,}
@@ -41,4 +41,3 @@ Currently none
 \keyword{environmental}
 \keyword{in-situ,}
 \keyword{weather}
-

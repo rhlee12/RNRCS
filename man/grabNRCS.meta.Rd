@@ -22,14 +22,14 @@ grabNRCS.meta(ntwrks="SCAN")
 grabNRCS.meta(ntwrks=c("SNTL","MPRC"))
 grabNRCS.meta(ntwrks="ALL")
 }
-\author{
-Josh Roberti \email{jaroberti87@gmail.com}
-}
 \references{
 A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
 }
 \seealso{
 Currently none
+}
+\author{
+Josh Roberti \email{jaroberti87@gmail.com}
 }
 \keyword{atmopsheric}
 \keyword{atmosphere,}
@@ -39,4 +39,3 @@ Currently none
 \keyword{environmental}
 \keyword{in-situ,}
 \keyword{weather\cr}
-

@@ -9,31 +9,33 @@ grabNRCS.data(network, site_id, timescale, DayBgn, DayEnd)
 \arguments{
 \item{network}{The network of the NRCS/AWDB site of interest. Currently only works for options: 'SCAN','SNTL','SNTLT', and 'OTHER'.\cr}
 
-\item{site_id}{The NRCS site ID. Use grabNRCS.meta to retrieve a list of available sites in a specified network. \cr}
+\item{site_id}{The NRCS site ID. Use grabNRCS.meta to retrieve a list of available sites in a specified network. Consider using the package 'metScanR' to locate sites.\cr}
 
 \item{timescale}{Specify the desired timescale of the data. Typically 'hourly', 'daily', or 'monthly'\cr}
 
-\item{DayBgn}{Optional. Specify the beginning date for the returned date, otherwise the beginning of the period of record is returned.\cr}
+\item{DayBgn}{Optional. Specify the beginning date (as ) for the returned data, otherwise the beginning of the period of record is returned.\cr}
 
-\item{DayEnd}{Optional. Specify the end date for the returned date, otherwise the end of the period of record is returned.\cr}
+\item{DayEnd}{Optional. Specify the end date for the returned data, otherwise the end of the period of record is returned.\cr}
 }
 \value{
-Returns a data frame of requested data. If the output is not specified, the data frame is returned as 'NRCS.df' to the global environment.\cr
+Returns a data frame of requested data and a list of varaibles with no data. If the output is not specified, the data frame is returned as 'NRCS.df' to the global environment. A list of missing variables is also returned to the Global Environment, as 'missingVars'.\cr
 }
 \description{
-A data downloading tool for NRCS networks.
+A data downloading tool for NRCS networks. Data are returned to the global environment as NRCS.df, if output isn't specified. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
 }
 \examples{
-Currently none
-}
-\author{
-Robert Lee \email{rhlee@colorado.edu}
+grabNRCS.data(network="SCAN", site_id=2221, timescale="hourly", DayBgn="2017-01-01", DayEnd="2017-02-01") #Return houly summaries for January 2017, at a SCAN site.
+grabNRCS.data(network="SNTL", site_id=314, timescale="daily", DayBgn="2017-01-01", DayEnd="2017-02-01") # #Return daily summaries for January 2017, at a SNOTEL site.
+grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly") #Return monthly summaries for the period of record at a SNOLITE site.
 }
 \references{
 A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
 }
 \seealso{
 Currently none
+}
+\author{
+Robert Lee \email{rhlee@colorado.edu}
 }
 \keyword{atmopsheric}
 \keyword{atmosphere,}
@@ -43,4 +45,3 @@ Currently none
 \keyword{environmental}
 \keyword{in-situ,}
 \keyword{weather\cr}
-
