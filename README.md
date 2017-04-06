@@ -31,3 +31,4 @@ In addition to support for pulling hydrologic data, we plan to implement some si
 - Wind rose plotting
 - Graphical profiles of soil temperature and moisture
 - Station comparison tools, for validating data
+- Pulling Soil Survey data from NCSS
