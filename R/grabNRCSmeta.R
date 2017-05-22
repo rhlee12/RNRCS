@@ -12,7 +12,7 @@
 
 #' @keywords environment, data, environmental data, atmosphere, atmopsheric data, climate, in-situ, weather\cr
 
-#' @references A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
+#' @references Downloads <https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm>
 
 #' @examples
 #' grabNRCS.meta(ntwrks="SCAN")

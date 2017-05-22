@@ -1,10 +1,11 @@
 Package: RNRCS
 Type: Package
-Title: Download and Work with NRCS Data
-Version: 0.1.0
+Title: Download NRCS Data
+Version: 0.1.1
 Author: Robert Lee <rhlee@colorado.edu>, Josh Roberti <jaroberti87@gmail.com>,
 Maintainer: Robert Lee <rhlee@colorado.edu>
-Description: RNRCS downloads NRCS data and metadata, currently for sites in the SCAN, SNOTEL, and SNOLITE networks. Future updates will incorporate BOR, SNOW, and USGS sites in the NRCS/AWDB network.
+Description: Downloads Natural Resources Conservation Service (NRCS) data for sites in the Soil Climate Analysis Network (SCAN) <https://www.wcc.nrcs.usda.gov/scan/>, and Snow Telemetry (SNOTEL and SNOLITE) <https://www.wcc.nrcs.usda.gov/snow/> networks. Metadata can be returned for all sites in the NRCS' Air and Water Data Base (AWDB) <https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf>.
+URL: https://rhlee12.github.io/RNRCS/
 Depends:
     R (>= 3.3.1)
 Imports:

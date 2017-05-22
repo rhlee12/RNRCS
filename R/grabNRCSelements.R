@@ -13,10 +13,9 @@
 
 #' @examples
 #' grabNRCS.elements(site_id='SCAN:2221')
-#' grabNRCS.elements(site_id=c('SCAN:2221','SNTL:1277','SNTL:1252'))
 #'
 
-#' @references element level information can be found here: https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm#commonlyUsedElementCodes
+#' @references Downloads <https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm>
 #'
 #' @seealso Currently none
 

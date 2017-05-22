@@ -21,7 +21,7 @@ A search tool that grabs site level metadata for NRCS networks: SCAN, SNOTEL, SN
 grabNRCS.meta(ntwrks="SCAN")
 }
 \references{
-A list networks and their identifiers can be found here: https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf
+Downloads <https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm>
 }
 \seealso{
 Currently none
