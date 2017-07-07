@@ -26,12 +26,15 @@ The AWDB's focus is on climate data in the Western United States, and underpins 
  - Reservoir Level
 
 ## What Data Can I Get With RNRCS?
-Currently, the package can only pull data from the SCAN, SNOTEL and SNOLITE networks, and the metadata from all networks within the AWDB. Fortunately, the SCAN and SNOTEL networks measure all of the above variables except for streamflow and reservoir level. Support for pulling data on those elements is coming in future versions of the package.
+Currently, the package pulls data from the BOR, SCAN, SNOTEL and SNOLITE networks, and the metadata from all networks within the AWDB. Data from SCAN and SNOTEL/SNOLITE networks are fetched with the `grabNRCS.data` function.
+
+Additionally, States Bureau of Reclamation reservoir data can be fetched with the `grabBOR.data` function. Data are returned for elements like water level and storage in the reservoir.
+
+With package version 0.2.0, a wind rose for data from SCAN sites can be generated, using `plotSCAN.windrose`. Only the site ID of a SCAN site and the start/end dates need to be input. 
 
 ## What Else is Coming in RNRCS?
 In addition to support for pulling hydrologic data, we plan to implement some simple tools for visualizing the returned data. These tools will include:
 - A hydrograph plotting function, for a given site and water year
-- Wind rose plotting
 - Graphical profiles of soil temperature and moisture
 - Station comparison tools, for validating data
 - Pulling Soil Survey data from NCSS
