@@ -3,21 +3,24 @@
 
 #' @author Robert Lee \email{rhlee@colorado.edu}
 
-#' @description A data downloading tool for NRCS networks. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
+#' @description A data downloading tool for reservoirs managed by the United States Bureau of Reclamation. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
 
-#' @param site_id The NRCS site ID. Use grabNRCS.meta to retrieve a list of available sites in a specified network. Consider using the package 'metScanR' to locate sites.\cr
+#' @param site_id The BOR site ID. Use grabNRCS.meta to retrieve a list of available sites in a specified network. Consider using the package 'metScanR' to locate sites.\cr
 #' @param timescale Specify the desired timescale of the data. Typically 'hourly', 'daily', or 'monthly'\cr
-#' @param DayBgn Optional. Specify the beginning date (as YYYY-MM-DD ) for the returned data, otherwise the beginning of the period of record is returned.\cr
-#' @param DayEnd Optional. Specify the end date (as YYYY-MM-DD ) for the returned data, otherwise the end of the period of record is returned.\cr
+#' @param DayBgn Specify the beginning date (as YYYY-MM-DD ) for the returned data.\cr
+#' @param DayEnd Specify the end date (as YYYY-MM-DD ) for the returned data.\cr
 #'
 #' @return Returns a data frame of requested data and a list of varaibles with no data.\cr
 
-#' @keywords environment, data, environmental data, atmosphere, atmopsheric data, climate, in-situ, weather\cr
+#' @keywords environment, data, environmental data, atmosphere, atmopsheric data, climate, in-situ, weather, reservoir, Bureau of Reclamation\cr
 
 #' @references Downloads <https://wcc.sc.egov.usda.gov/reportGenerator>
 #'
 #' @examples
-#' JacksonLake<- grabBOR.data(site_id = 13010500, timescale = "monthly")
+#' \dontrun{
+#' JacksonLake<- grabBOR.data(site_id = 13010500, timescale = "monthly",
+#' DayBgn="2016-01-01", DayEnd="2017-01-01")
+#' }
 #' #Return monthly summaries for the period of record at a Jackson Lake, WY.
 
 #' @seealso Currently none
@@ -35,8 +38,8 @@ grabBOR.data<-function(site_id, timescale, DayBgn, DayEnd){
     options(stringsAsFactors = F)
 
     #Default to period of record for station if dates not specified.
-    if(missing(DayBgn)){DayBgn<-"POR_BEGIN"}
-    if(missing(DayEnd)){DayEnd<-"POR_END"}
+    # if(missing(DayBgn)){DayBgn<-"POR_BEGIN"}
+    # if(missing(DayEnd)){DayEnd<-"POR_END"}
 
     #Stick to the appropriate timescales
     ctrl_timescale<-c("daily", "monthly")

@@ -13,19 +13,20 @@ grabNRCS.data(network, site_id, timescale, DayBgn, DayEnd)
 
 \item{timescale}{Specify the desired timescale of the data. Typically 'hourly', 'daily', or 'monthly'\cr}
 
-\item{DayBgn}{Optional. Specify the beginning date (as YYYY-MM-DD ) for the returned data, otherwise the beginning of the period of record is returned.\cr}
+\item{DayBgn}{Specify the beginning date (as YYYY-MM-DD ) for the returned data.\cr}
 
-\item{DayEnd}{Optional. Specify the end date (as YYYY-MM-DD ) for the returned data, otherwise the end of the period of record is returned.\cr}
+\item{DayEnd}{Specify the end date (as YYYY-MM-DD ) for the returned data.\cr}
 }
 \value{
-Returns a data frame of requested data and a list of varaibles with no data.\cr
+Returns a data frame of requested data. Only elements with at least one data will be returned in the data frame.\cr
 }
 \description{
 A data downloading tool for NRCS networks. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
 }
 \examples{
-grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly")
-#Return monthly summaries for the period of record at a SNOLITE site.
+grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly",
+DayBgn = '2017-01-01', DayEnd = '2017-05-01')
+#Return monthly summaries between January and May 2017 of record at a SNOLITE site.
 }
 \references{
 Downloads <https://wcc.sc.egov.usda.gov/reportGenerator>
