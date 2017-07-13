@@ -64,7 +64,7 @@ plotSCAN.windrose <- function(scan_site, DayBgn, DayEnd, speed_bins= 10, dir_bin
 
     degreeSteps<-360/dir_bins
     dir.bins<-seq(0, 360, 360/dir_bins)
-    all_binned<-cbind(all, "Wind Speed"= cut(all$Speed, breaks = speed_bins), "Dir.cut"= cut(all$Dir, breaks = dir.bins))
+    all_binned<-cbind(all, "Wind Speed"= cut(all$Speed, breaks = speed_bins), "DirCut"= cut(all$Dir, breaks = dir.bins))
     all_binned<-stats::na.omit(all_binned)
 
     bgnLabels<- unique((dir.bins-(degreeSteps/2))%%360)
@@ -73,7 +73,7 @@ plotSCAN.windrose <- function(scan_site, DayBgn, DayEnd, speed_bins= 10, dir_bin
     dirLabels<-paste0(bgnLabels, "-", endLabels)
     titleString<-paste0("SCAN:", scan_site, " ", titleUnits, ", ", DayBgn, " to ", DayEnd)
 
-    plot<-ggplot2::ggplot(data = all_binned, ggplot2::aes(x=Dir.cut, fill=`Wind Speed`, colors=factor(`Wind Speed`)))+
+    plot<-ggplot2::ggplot(data = all_binned, ggplot2::aes_string(x="DirCut", fill="Wind Speed", colors=factor("Wind Speed")))+
         ggplot2::geom_bar(width = .95, show.legend = T)+
         ggplot2::theme_linedraw()+
         ggplot2::coord_polar(theta = "x", start = 0)+

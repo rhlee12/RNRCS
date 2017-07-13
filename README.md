@@ -1,8 +1,8 @@
 # RNRCS
 Public repository for the RNRCS package, which pulls data from NRCS for use in R.
 
-[![](http://cranlogs.r-pkg.org/badges/RNRCS)](http://cran.rstudio.com/web/packages/RNRCS/index.html) 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RNRCS)](http://cran.r-project.org/package=RNRCS)
+[![](http://cranlogs.r-pkg.org/badges/RNRCS)](https://cran.rstudio.com/web/packages/RNRCS/index.html) 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RNRCS)](https://cran.rstudio.com/web/packages/RNRCS/index.html)
 
 ## How it works 
 This package relies on calling the NRCS AWDB API for data, site metadata and network metadata. When pulling data the package builds an API link to CSV data for the requested site, for all elements (measurement types) reported at the site. The CSV data are then cleaned, and columns of missing data are removed. More information about the underlying API can be found [here](https://www.wcc.nrcs.usda.gov/web_service/AWDB_Web_Service_Reference.htm).  
