@@ -24,9 +24,11 @@ Returns a data frame of requested data. Only elements with at least one data wil
 A data downloading tool for NRCS networks. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
 }
 \examples{
+\dontrun{
 grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly",
 DayBgn = '2017-01-01', DayEnd = '2017-05-01')
 #Return monthly summaries between January and May 2017 of record at a SNOLITE site.
+}
 }
 \references{
 Downloads <https://wcc.sc.egov.usda.gov/reportGenerator>

@@ -18,9 +18,11 @@
 #' @references Downloads <https://wcc.sc.egov.usda.gov/reportGenerator>
 #'
 #' @examples
+#' \dontrun{
 #' grabNRCS.data(network="SNTLT", site_id=1198, timescale="monthly",
 #' DayBgn = '2017-01-01', DayEnd = '2017-05-01')
 #' #Return monthly summaries between January and May 2017 of record at a SNOLITE site.
+#' }
 
 #' @seealso Currently none
 
@@ -58,25 +60,29 @@ grabNRCS.data<-function(network, site_id, timescale, DayBgn, DayEnd){
     comboCode<-paste(network, site_id, sep=":")
     siteElmnt<-RNRCS::grabNRCS.elements(comboCode)
     siteEnames<-trimws(siteElmnt[[1]]$element, which = "both")
+    siteEnames = gsub(pattern = "-", replacement = "", x = siteEnames)
+    siteEnames = gsub(pattern = "  ", replacement = " ", x = siteEnames)
     eCodeIndx <- c()
     for(i in 1:length(siteEnames)){
         eCodeIndx<-append(eCodeIndx, grep(tolower(siteEnames[i]), tolower(eCodes$ElementName)))
     }
 
-    siteEcodes<- eCodes$ElementCode[eCodeIndx]
+    siteEcodes<- trimws(eCodes$ElementCode[eCodeIndx])
+
     eCodeString<-do.call(paste, c(as.list(siteEcodes), sep = "::value,"))
     eCodeString<-paste0(eCodeString, "::value")
 
-#     Soil temperature and moisture are currently broken, will implement again later
-#     stoString<-"STO:-2:value:hourly MEAN,STO:-4:value:hourly MEAN,STO:-8:value:hourly MEAN,STO:-20:value:hourly MEAN,STO:-40:value:hourly MEAN,"
-#     smsString<-"SMS:-2:value:hourly MEAN,SMS:-4:value:hourly MEAN,SMS:-8:value:hourly MEAN,SMS:-20:value:hourly MEAN,SMS:-40:value:hourly MEAN,"
-#
-#
-#      eCodeString<-gsub(pattern="STO::value", replacement = stoString, eCodeString)
-#      eCodeString<-gsub(pattern="SMS::value", replacement = stoString, eCodeString)
+    #Soil temperature and moisture are currently broken, will implement again later
+    stoString<-"STO:-2:value,STO:-4:value,STO:-8:value,STO:-20:value,STO:-40:value"
+    smsString<-"SMS:-2:value,SMS:-4:value,SMS:-8:value,SMS:-20:value,SMS:-40:value"
 
-     eCodeString<-gsub(pattern="STO::value,", replacement = "", eCodeString)
-     eCodeString<-gsub(pattern="SMS::value,", replacement = "", eCodeString)
+
+     eCodeString<-gsub(pattern="STO::value", replacement = stoString, eCodeString)
+     eCodeString<-gsub(pattern="SMS::value", replacement = smsString, eCodeString)
+     eCodeString=gsub(pattern = "SRADT", replacement = "SRADV::value,SRADT", x = eCodeString)
+
+     # eCodeString<-gsub(pattern="STO::value,", replacement = "", eCodeString)
+     # eCodeString<-gsub(pattern="SMS::value,", replacement = "", eCodeString)
     # #Build data URL
     baseURL <- "https://wcc.sc.egov.usda.gov/reportGenerator/view_csv/customSingleStationReport/"
 
