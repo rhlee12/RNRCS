@@ -7,7 +7,7 @@ Maintainer: Robert Lee <rhlee@colorado.edu>
 Description: Downloads Natural Resources Conservation Service (NRCS) data for sites in the Soil Climate Analysis Network (SCAN) <https://www.wcc.nrcs.usda.gov/scan/>, and Snow Telemetry (SNOTEL and SNOLITE) <https://www.wcc.nrcs.usda.gov/snow/> networks. Metadata can be returned for all sites in the NRCS' Air and Water Data Base (AWDB) <https://www.wcc.nrcs.usda.gov/report_generator/AWDB_Network_Codes.pdf>.
 URL: https://rhlee12.github.io/RNRCS/
 Depends:
-    R (>= 3.3.1)
+    R (>= 3.3)
 Imports:
     magrittr,
     rvest,
