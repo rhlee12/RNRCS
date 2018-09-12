@@ -53,7 +53,7 @@ grabNRCS.data<-function(network, site_id, timescale, DayBgn, DayEnd){
     if (!network %in% ctrlNetworks){stop("Please enter one of the following for network: 'SCAN', 'SNTL', 'SNTLT'")}
 
     #Station metadata
-    meta<-grabNRCS.meta(ntwrks = network)
+    meta<-RNRCS::grabNRCS.meta(ntwrks = network)
     site_state<-as.character(meta[[1]]$state[grep(pattern = site_id, x=meta[[1]]$site_id)])
 
     #Get station elements, translate into element codes
@@ -80,6 +80,7 @@ grabNRCS.data<-function(network, site_id, timescale, DayBgn, DayEnd){
      eCodeString<-gsub(pattern="STO::value", replacement = stoString, eCodeString)
      eCodeString<-gsub(pattern="SMS::value", replacement = smsString, eCodeString)
      eCodeString=gsub(pattern = "SRADT", replacement = "SRADV::value,SRADT", x = eCodeString)
+     cCodeString=gsub(pattern = )
 
      # eCodeString<-gsub(pattern="STO::value,", replacement = "", eCodeString)
      # eCodeString<-gsub(pattern="SMS::value,", replacement = "", eCodeString)
