@@ -1,5 +1,6 @@
 [![](http://cranlogs.r-pkg.org/badges/RNRCS)](https://cran.rstudio.com/web/packages/RNRCS/index.html) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RNRCS)](http://cran.r-project.org/package=RNRCS)
+[![Build Status](https://travis-ci.org/rhlee12/RNRCS.svg?branch=tCI)](https://travis-ci.org/rhlee12/RNRCS)
 
 # RNRCS
 Public repository for the RNRCS package, which pulls data from NRCS for use in R.
