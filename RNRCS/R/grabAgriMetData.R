@@ -1,9 +1,9 @@
 ##############################################################################################
-#' @title grabNRCS.data
+#' @title grabAgriMet.data
 
 #' @author Robert Lee \email{rhlee@colorado.edu}
 
-#' @description A data downloading tool for NRCS networks. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
+#' @description A data downloading tool for AgriMet networks. Data retrieval is limited by the speed of the connection, if timeout errors persist break requested time periods down into smaller chunks, or use a faster connection.
 
 #' @param site_id An AgriMet station code (4 upper-case characters). A station map with codes is located here: \url{https://www.usbr.gov/pn/agrimet/agrimetmap/agrimap.html}.\cr
 #' @param timescale Specify the desired timescale of the data. Valid entries are 'subhourly', hourly', or 'daily'.\cr
@@ -13,9 +13,8 @@
 #'
 #' @return Returns a data frame of requested data. Only elements with at least one data will be returned in the data frame.\cr
 
-#' @keywords environment, data, environmental data, atmosphere, atmopsheric data, climate, in-situ, weather\cr
+#' @keywords environment, data, environmental data, atmosphere, atmopsheric data, climate, in-situ, weather, AgriMet\cr
 
-#' @references Downloads <https://wcc.sc.egov.usda.gov/reportGenerator>
 #'
 #' @examples
 #' \dontrun{
@@ -28,11 +27,8 @@
 #' @export
 
 # changelog and author contributions / copyrights
-#   Robert Lee (2017-04-03)
+#   Robert Lee (2020-07-06)
 #     Original creation
-#   Robert Lee (2017-07-06)
-#    Removed period of record calls, soil elements,
-#    and swithced to read.csv for data return
 ##############################################################################################
 
 getAgriMet.data=function(site_id, timescale, DayBgn, DayEnd, pCodes){
