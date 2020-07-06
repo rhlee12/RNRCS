@@ -29,6 +29,8 @@
 ##############################################################################################
 
 grabNRCS.meta<-function(ntwrks="SCAN",cnvrt.elev=FALSE){
+    options(timeout = 120)
+
     #QC check:
     ntwrks.cntrl<-c("SCAN","SNTL","SNTLT","SNOW","MPRC","OTHER","COOP","USGS","MSNT","BOR","CLMIND","ALL")
     ntwrks.QC<-ntwrks %in% ntwrks.cntrl
@@ -44,9 +46,8 @@ grabNRCS.meta<-function(ntwrks="SCAN",cnvrt.elev=FALSE){
     #create dynamic url link using "ntwrks" vector to access the data we want:
     urls<-lapply(ntwrks.Lcase,function(x) paste0("https://wcc.sc.egov.usda.gov/nwcc/yearcount?network=",x,"&counttype=listwithdiscontinued&state="))
     #grab metadata from each of the sites:
-    stationMetadata<-lapply(urls, function(x) xml2::read_html(x))
-    #define %>% globally or it won't work:
-    `%>%` <-magrittr::`%>%`
+    stationMetadata<-lapply(urls, function(x) xml2::read_html(x, ))
+
     #grab headers:
     headers.NRCS<-lapply(stationMetadata, function(x) x %>% rvest::html_nodes("th"))
     #clean the headers of HTML code:

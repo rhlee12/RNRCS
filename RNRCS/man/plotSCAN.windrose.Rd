@@ -4,8 +4,14 @@
 \alias{plotSCAN.windrose}
 \title{plotSCAN.windrose}
 \usage{
-plotSCAN.windrose(scan_site, DayBgn, DayEnd, speed_bins = 10, dir_bins = 15,
-  units = c("metric", "imperial"))
+plotSCAN.windrose(
+  scan_site,
+  DayBgn,
+  DayEnd,
+  speed_bins = 10,
+  dir_bins = 15,
+  units = c("metric", "imperial")
+)
 }
 \arguments{
 \item{scan_site}{The numeric ID for a valid SCAN site.\cr}

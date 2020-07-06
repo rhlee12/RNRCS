@@ -80,7 +80,6 @@ grabNRCS.data<-function(network, site_id, timescale, DayBgn, DayEnd){
      eCodeString<-gsub(pattern="STO::value", replacement = stoString, eCodeString)
      eCodeString<-gsub(pattern="SMS::value", replacement = smsString, eCodeString)
      eCodeString=gsub(pattern = "SRADT", replacement = "SRADV::value,SRADT", x = eCodeString)
-     cCodeString=gsub(pattern = )
 
      # eCodeString<-gsub(pattern="STO::value,", replacement = "", eCodeString)
      # eCodeString<-gsub(pattern="SMS::value,", replacement = "", eCodeString)
