@@ -68,38 +68,53 @@ getAgriMet.data=function(site_id, timescale, DayBgn, DayEnd, pCodes){
             gsub(pattern = "PCODES", replacement = PCODES)
 
         # Store the return of the call
-        returnedData=readLines(callURL)
+        returnedData=readLines(callURL, warn = F)
+        #print(tail(returnedData))
 
         # If we got enough data, we'll parse that. Othewise we'll just message that nothing was there.
+        #if(any(grepl(pattern = "BEGIN DATA", x = returnedData))&any(grepl(pattern = "END DATA", x = returnedData))){
         if(any(grepl(pattern = "BEGIN DATA", x = returnedData))){
-
             # Get the data start + stop in the return
             dataStartIndex=grep(pattern = "BEGIN DATA", x = returnedData)+2
-            dataEndIndex=grep(pattern = "END DATA", x = returnedData)-1
+            if(any(grepl(pattern = "END DATA", x = returnedData))){
+                dataEndIndex=grep(pattern = "END DATA", x = returnedData)-1
+            }else{
+                dataEndIndex=length(returnedData)-1
+                actualStartDate=stringr::str_extract(returnedData[dataStartIndex], pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4}") %>%
+                    as.POSIXct(format="%m/%d/%Y") %>%
+                    as.character()
+
+                actualEndDate=stringr::str_extract(returnedData[dataEndIndex], pattern = "[0-9]{2}/[0-9]{2}/[0-9]{4}") %>%
+                    as.POSIXct(format="%m/%d/%Y") %>%
+                    as.character()
+
+
+                warning(paste0("----------\nWARNING!\n  The full requested preriod was NOT returned.\n  Date range returned was ", actualStartDate, " to ", actualEndDate,"\n---------"))
+            }
 
             # get the names of the data
             colnames=strsplit(x=returnedData[dataStartIndex-1], split = ",") %>% unlist() %>% trimws()
 
             # if we got at least one row of data, parse it and return (end of function)
-            if(dataEndIndex>dataStartIndex){
-                dataOut=returnedData[dataStartIndex:dataEndIndex] %>%
-                    strsplit(split = ",") %>%
-                    lapply(FUN = trimws) %>%
-                    do.call(what = "rbind") %>%
-                    as.data.frame() %>%
-                    `colnames<-`(value=colnames)
+            #if(dataEndIndex>dataStartIndex){
+            dataOut=returnedData[dataStartIndex:dataEndIndex] %>%
+                strsplit(split = ",") %>%
+                lapply(FUN = trimws) %>%
+                do.call(what = rbind) %>%
+                as.data.frame() %>%
+                `colnames<-`(value=colnames)
 
-                return(dataOut)
-                # if no data, say so
-            }else{
-                message(paste0("No data found for parameters entered. \nData URL tried: \n", callURL))
-            }
+            return(dataOut)
+            # if no data, say so
+            # }else{
+            #     message(paste0("No data found for parameters entered. \nData URL tried: \n", callURL))
+            # }
             # if no data, say so
         }else{
             message(paste0("No data found for parameters entered. \nData URL tried: \n", callURL))
         }
 
-    # Error in selected timestamp
+        # Error in selected timestamp
     }else{
         stop("timestamp parameter must be one of the following: subhourly, hourly, daily, monthly")
     }
